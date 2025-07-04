@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registros Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen p-6">
+  <h1 class="text-2xl font-bold mb-6">Panel de Registros</h1>
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-2">Top 10 productos más vendidos</h2>
+    <table class="w-full bg-white rounded-xl shadow mb-4">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="px-3 py-2">#</th>
+          <th class="px-3 py-2">Producto</th>
+          <th class="px-3 py-2">Cantidad</th>
+        </tr>
+      </thead>
+      <tbody id="topProductos"></tbody>
+    </table>
+  </section>
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-2">Top 10 ventas más caras</h2>
+    <table class="w-full bg-white rounded-xl shadow mb-4">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="px-3 py-2">#</th>
+          <th class="px-3 py-2">Cliente</th>
+          <th class="px-3 py-2">Total</th>
+        </tr>
+      </thead>
+      <tbody id="topVentas"></tbody>
+    </table>
+  </section>
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-2">LOG de inicios de sesión</h2>
+    <table class="w-full bg-white rounded-xl shadow mb-4">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="px-3 py-2">Fecha</th>
+          <th class="px-3 py-2">Usuario</th>
+        </tr>
+      </thead>
+      <tbody id="logs"></tbody>
+    </table>
+  </section>
+  <section class="mb-8 flex gap-6">
+    <div class="bg-white p-6 rounded-xl shadow w-1/2 text-center">
+      <div class="text-5xl font-bold mb-2" id="cantVentas">--</div>
+      <div class="text-gray-600">Total Ventas</div>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow w-1/2 text-center">
+      <div class="text-5xl font-bold mb-2" id="promedioVenta">--</div>
+      <div class="text-gray-600">Promedio por Venta</div>
+    </div>
+  </section>
+  <section>
+    <button onclick="descargarEncuestas()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Descargar encuestas en Excel</button>
+  </section>
+  <script>
+    const topProductos = [
+      { nombre: "Producto 1", cantidad: 100 },
+      { nombre: "Producto 2", cantidad: 90 },
+      { nombre: "Producto 3", cantidad: 80 },
+      { nombre: "Producto 4", cantidad: 77 },
+      { nombre: "Producto 5", cantidad: 66 },
+      { nombre: "Producto 6", cantidad: 55 },
+      { nombre: "Producto 7", cantidad: 40 },
+      { nombre: "Producto 8", cantidad: 39 },
+      { nombre: "Producto 9", cantidad: 28 },
+      { nombre: "Producto 10", cantidad: 10 }
+    ];
+    const topVentas = [
+      { cliente: "Juan", total: 25000 },
+      { cliente: "María", total: 22000 },
+      { cliente: "Ana", total: 21500 },
+      { cliente: "Pablo", total: 20700 },
+      { cliente: "Lucas", total: 19400 },
+      { cliente: "Sofía", total: 18000 },
+      { cliente: "Pedro", total: 17800 },
+      { cliente: "Luz", total: 15000 },
+      { cliente: "Bruno", total: 13000 },
+      { cliente: "Lila", total: 12800 }
+    ];
+    const logs = [
+      { fecha: "2025-07-04 10:00", usuario: "admin" },
+      { fecha: "2025-07-03 11:23", usuario: "admin" },
+      { fecha: "2025-07-03 09:11", usuario: "jefe" }
+    ];
+    const encuestas = [
+      { email: "a@a.com", opinion: "Muy bueno", puntaje: 9, recomienda: true, fecha: "2025-07-04" },
+      { email: "b@b.com", opinion: "Mejorable", puntaje: 6, recomienda: false, fecha: "2025-07-04" }
+    ];
+    document.getElementById('topProductos').innerHTML =
+      topProductos.map((p, i) => `<tr><td class="px-3 py-2">${i+1}</td><td class="px-3 py-2">${p.nombre}</td><td class="px-3 py-2">${p.cantidad}</td></tr>`).join('');
+    document.getElementById('topVentas').innerHTML =
+      topVentas.map((v, i) => `<tr><td class="px-3 py-2">${i+1}</td><td class="px-3 py-2">${v.cliente}</td><td class="px-3 py-2">$${v.total}</td></tr>`).join('');
+    document.getElementById('logs').innerHTML =
+      logs.map(l => `<tr><td class="px-3 py-2">${l.fecha}</td><td class="px-3 py-2">${l.usuario}</td></tr>`).join('');
+    document.getElementById('cantVentas').textContent = topVentas.length;
+    document.getElementById('promedioVenta').textContent = "$" + (topVentas.reduce((acc, v) => acc + v.total, 0) / topVentas.length).toFixed(2);
+    function descargarEncuestas() {
+      const ws = XLSX.utils.json_to_sheet(encuestas);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Encuestas");
+      XLSX.writeFile(wb, "encuestas.xlsx");
+    }
+  </script>
+</body>
+</html>
