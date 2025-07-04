@@ -1,17 +1,14 @@
-Estructura de archivos
 
-- encuesta.html
-  Pantalla para que el cliente complete una encuesta luego de ver el ticket. Valida inputs, soporta imagen, muestra modal de agradecimiento.
+Estructura del proyecto frontend (archivos separados en carpetas):
 
-- detalle.html
-  Muestra el detalle de un producto según el id de la ruta. Simula datos, listo para conectar a tu backend.
+/pages - HTML de cada pantalla
+/css   - Estilos CSS personalizados (pueden estar vacíos)
+/js    - Código JavaScript de cada pantalla
+/assets - Carpeta para imágenes o archivos
 
-- admin-registros.html
-  Pantalla de registros para el administrador: top productos, ventas, logs, estadísticas, exportación Excel de encuestas.
+Cómo usar:
+- Abrí los HTML desde /pages en tu navegador.
+- Editá los JS para conectar tu backend real (donde dice "simulado").
+- Estilos base con TailwindCSS CDN, pero podés agregar más en cada CSS.
 
-- assets/
-  Carpeta vacía para imágenes, puedes usarla si lo necesitás.
-
-Integración: reemplazá los arrays simulados y fetch por los endpoints reales de tu sistema.
-
-¡Cualquier ajuste avisame!
+Consultas o integración: ¡avísame!

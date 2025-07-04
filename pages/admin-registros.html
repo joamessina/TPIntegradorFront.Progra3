@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registros Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+  <link href="../css/admin-registros.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen p-6">
+  <h1 class="text-2xl font-bold mb-6">Panel de Registros</h1>
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-2">Top 10 productos más vendidos</h2>
+    <table class="w-full bg-white rounded-xl shadow mb-4">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="px-3 py-2">#</th>
+          <th class="px-3 py-2">Producto</th>
+          <th class="px-3 py-2">Cantidad</th>
+        </tr>
+      </thead>
+      <tbody id="topProductos"></tbody>
+    </table>
+  </section>
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-2">Top 10 ventas más caras</h2>
+    <table class="w-full bg-white rounded-xl shadow mb-4">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="px-3 py-2">#</th>
+          <th class="px-3 py-2">Cliente</th>
+          <th class="px-3 py-2">Total</th>
+        </tr>
+      </thead>
+      <tbody id="topVentas"></tbody>
+    </table>
+  </section>
+  <section class="mb-8">
+    <h2 class="text-xl font-semibold mb-2">LOG de inicios de sesión</h2>
+    <table class="w-full bg-white rounded-xl shadow mb-4">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="px-3 py-2">Fecha</th>
+          <th class="px-3 py-2">Usuario</th>
+        </tr>
+      </thead>
+      <tbody id="logs"></tbody>
+    </table>
+  </section>
+  <section class="mb-8 flex gap-6">
+    <div class="bg-white p-6 rounded-xl shadow w-1/2 text-center">
+      <div class="text-5xl font-bold mb-2" id="cantVentas">--</div>
+      <div class="text-gray-600">Total Ventas</div>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow w-1/2 text-center">
+      <div class="text-5xl font-bold mb-2" id="promedioVenta">--</div>
+      <div class="text-gray-600">Promedio por Venta</div>
+    </div>
+  </section>
+  <section>
+    <button onclick="descargarEncuestas()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Descargar encuestas en Excel</button>
+  </section>
+  <script src="../js/admin-registros.js"></script>
+</body>
+</html>
