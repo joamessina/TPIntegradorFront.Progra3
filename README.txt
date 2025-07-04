@@ -11,4 +11,4 @@ Cómo usar:
 - Editá los JS para conectar tu backend real (donde dice "simulado").
 - Estilos base con TailwindCSS CDN, pero podés agregar más en cada CSS.
 
-Consultas o integración: ¡avísame!
+
