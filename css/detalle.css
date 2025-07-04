@@ -1,1 +1,27 @@
-/* Estilos extra para detalle */
+body {
+  background: linear-gradient(120deg, #f8fafc 0%, #dbeafe 100%);
+}
+
+#producto {
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 32px rgba(24, 90, 219, 0.08);
+  transition: box-shadow 0.2s;
+}
+
+#producto:hover {
+  box-shadow: 0 8px 40px rgba(24, 90, 219, 0.12);
+}
+
+#producto img {
+  border: 2px solid #2563eb;
+  background: #f0f5ff;
+}
+
+a {
+  color: #2563eb;
+  text-decoration: underline;
+  font-weight: 500;
+}
+a:hover {
+  color: #1e40af;
+}
