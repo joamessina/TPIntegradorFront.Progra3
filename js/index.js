@@ -1,11 +1,24 @@
-document.addEventListener('DOMContentLoaded', async () => {
+const API_URL = 'http://localhost:3000/api/productos';
+const SOCKET_URL = 'http://localhost:3000';
+if (!localStorage.getItem('token')) {
+  window.location.href = '../pages/login.html';
+}
+async function cargarProductos() {
   const contenedor = document.getElementById('productos-list');
-  const API_URL = 'http://localhost:3000/api/productos'; // Cambia si deployás en otro lado
-
+  const token = localStorage.getItem('token');
   try {
-    const res = await fetch(API_URL);
+    const res = await fetch(API_URL, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    if (res.status === 401 || res.status === 403) {
+      localStorage.removeItem('token');
+      window.location.href = '../pages/login.html';
+      return;
+    }
     const data = await res.json();
-    const productos = data.rows || data; // si usás findAndCountAll, es .rows
+    const productos = data.rows || data;
 
     contenedor.innerHTML = productos
       .map(
@@ -33,7 +46,27 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (err) {
     contenedor.innerHTML = '<p>Error al cargar productos.</p>';
   }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  cargarProductos();
 
   // Año del footer
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Conexión Socket.io
+  const socket = io(SOCKET_URL);
+
+  socket.on('connect', () => {
+    console.log('Conectado a socket.io');
+  });
+
+  socket.on('productos-updated', () => {
+    console.log('Recibí productos-updated');
+    cargarProductos();
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Desconectado de socket.io');
+  });
 });
