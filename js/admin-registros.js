@@ -1,47 +1,153 @@
-const topProductos = [
-  { nombre: "Producto 1", cantidad: 100 },
-  { nombre: "Producto 2", cantidad: 90 },
-  { nombre: "Producto 3", cantidad: 80 },
-  { nombre: "Producto 4", cantidad: 77 },
-  { nombre: "Producto 5", cantidad: 66 },
-  { nombre: "Producto 6", cantidad: 55 },
-  { nombre: "Producto 7", cantidad: 40 },
-  { nombre: "Producto 8", cantidad: 39 },
-  { nombre: "Producto 9", cantidad: 28 },
-  { nombre: "Producto 10", cantidad: 10 }
+// admin-registros.js
+
+// MOCK DE DATOS
+const productosMasVendidos = [
+  { nombre: "Carta Pikachu Holo", vendidos: 320 },
+  { nombre: "Carta Charizard VMAX", vendidos: 298 },
+  { nombre: "Carta Eevee Evolución", vendidos: 285 },
+  { nombre: "Carta Mewtwo EX", vendidos: 271 },
+  { nombre: "Carta Snorlax GX", vendidos: 250 },
+  { nombre: "Carta Bulbasaur", vendidos: 228 },
+  { nombre: "Carta Gengar", vendidos: 205 },
+  { nombre: "Carta Lugia Rare", vendidos: 196 },
+  { nombre: "Carta Sylveon Full Art", vendidos: 181 },
+  { nombre: "Carta Greninja", vendidos: 172 },
 ];
-const topVentas = [
-  { cliente: "Juan", total: 25000 },
-  { cliente: "María", total: 22000 },
-  { cliente: "Ana", total: 21500 },
-  { cliente: "Pablo", total: 20700 },
-  { cliente: "Lucas", total: 19400 },
-  { cliente: "Sofía", total: 18000 },
-  { cliente: "Pedro", total: 17800 },
-  { cliente: "Luz", total: 15000 },
-  { cliente: "Bruno", total: 13000 },
-  { cliente: "Lila", total: 12800 }
+
+const ventasMasCaras = [
+  { producto: "Carta Charizard VMAX", precio: 45000 },
+  { producto: "Carta Mewtwo EX", precio: 38000 },
+  { producto: "Carta Lugia Rare", precio: 32000 },
+  { producto: "Carta Sylveon Full Art", precio: 29500 },
+  { producto: "Carta Pikachu Holo", precio: 27000 },
+  { producto: "Carta Eevee Evolución", precio: 25000 },
+  { producto: "Carta Snorlax GX", precio: 21000 },
+  { producto: "Carta Gengar", precio: 18900 },
+  { producto: "Carta Greninja", precio: 17400 },
+  { producto: "Carta Bulbasaur", precio: 16200 },
 ];
-const logs = [
-  { fecha: "2025-07-04 10:00", usuario: "admin" },
-  { fecha: "2025-07-03 11:23", usuario: "admin" },
-  { fecha: "2025-07-03 09:11", usuario: "jefe" }
+
+// Simula logs de login admin
+const logsLogin = [
+  { usuario: "admin1", fecha: "2025-07-05 09:12" },
+  { usuario: "admin2", fecha: "2025-07-04 17:31" },
+  { usuario: "admin1", fecha: "2025-07-03 08:50" },
+  { usuario: "admin3", fecha: "2025-07-03 08:35" },
 ];
+
+// Estadísticas extra (mock)
+const stats = {
+  encuestasRealizadas: 128,
+  productosTotales: 10,
+  ventasTotales: 2475,
+  adminsActivos: 3,
+};
+
+// MOCK de encuestas para exportar
 const encuestas = [
-  { email: "a@a.com", opinion: "Muy bueno", puntaje: 9, recomienda: true, fecha: "2025-07-04" },
-  { email: "b@b.com", opinion: "Mejorable", puntaje: 6, recomienda: false, fecha: "2025-07-04" }
+  {
+    email: "ash@poke.com",
+    opinion: "¡Me encantaron las cartas holográficas! Volveré a comprar.",
+    puntos: 10,
+    checkbox: "Recomendaría",
+    fecha: "2025-07-07",
+    imagen: "pikachu-holo.jpg",
+  },
+  {
+    email: "misty@poke.com",
+    opinion: "Gran variedad de cartas, excelente atención.",
+    puntos: 9,
+    checkbox: "Recomendaría",
+    fecha: "2025-07-06",
+    imagen: "charizard-vmax.jpg",
+  },
 ];
-document.getElementById('topProductos').innerHTML =
-  topProductos.map((p, i) => `<tr><td class="px-3 py-2">${i+1}</td><td class="px-3 py-2">${p.nombre}</td><td class="px-3 py-2">${p.cantidad}</td></tr>`).join('');
-document.getElementById('topVentas').innerHTML =
-  topVentas.map((v, i) => `<tr><td class="px-3 py-2">${i+1}</td><td class="px-3 py-2">${v.cliente}</td><td class="px-3 py-2">$${v.total}</td></tr>`).join('');
-document.getElementById('logs').innerHTML =
-  logs.map(l => `<tr><td class="px-3 py-2">${l.fecha}</td><td class="px-3 py-2">${l.usuario}</td></tr>`).join('');
-document.getElementById('cantVentas').textContent = topVentas.length;
-document.getElementById('promedioVenta').textContent = "$" + (topVentas.reduce((acc, v) => acc + v.total, 0) / topVentas.length).toFixed(2);
-function descargarEncuestas() {
+
+// --------- CARGA DE TABLAS ---------
+
+function cargarTablaProductosMasVendidos() {
+  const tbody = document.getElementById("tabla-productos-vendidos");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+  productosMasVendidos.forEach((prod, idx) => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${idx + 1}</td>
+        <td>${prod.nombre}</td>
+        <td>${prod.vendidos}</td>
+      </tr>
+    `;
+  });
+}
+
+function cargarTablaVentasMasCaras() {
+  const tbody = document.getElementById("tabla-ventas-caras");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+  ventasMasCaras.forEach((venta, idx) => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${idx + 1}</td>
+        <td>${venta.producto}</td>
+        <td>$${venta.precio}</td>
+      </tr>
+    `;
+  });
+}
+
+function cargarTablaLogs() {
+  const tbody = document.getElementById("tabla-logs-login");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+  logsLogin.forEach((log, idx) => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${idx + 1}</td>
+        <td>${log.usuario}</td>
+        <td>${log.fecha}</td>
+      </tr>
+    `;
+  });
+}
+
+function cargarStats() {
+  const stats1 = document.getElementById("stat-encuestas");
+  const stats2 = document.getElementById("stat-productos");
+  const stats3 = document.getElementById("stat-ventas");
+  const stats4 = document.getElementById("stat-admins");
+
+  if (stats1) stats1.innerText = stats.encuestasRealizadas;
+  if (stats2) stats2.innerText = stats.productosTotales;
+  if (stats3) stats3.innerText = stats.ventasTotales;
+  if (stats4) stats4.innerText = stats.adminsActivos;
+}
+
+// --------- EXPORTAR ENCUESTAS A EXCEL ---------
+// Requiere SheetJS (xlsx.full.min.js)
+
+function exportarEncuestasExcel() {
+  if (typeof XLSX === "undefined") {
+    alert("¡Falta SheetJS (xlsx.full.min.js) para exportar Excel!");
+    return;
+  }
+  // Estructura simple: convierto array a hoja
   const ws = XLSX.utils.json_to_sheet(encuestas);
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Encuestas");
-  XLSX.writeFile(wb, "encuestas.xlsx");
+  XLSX.writeFile(wb, "encuestas_cartas_pokemon.xlsx");
 }
+
+// --------- INICIALIZAR ---------
+
+document.addEventListener("DOMContentLoaded", function () {
+  cargarTablaProductosMasVendidos();
+  cargarTablaVentasMasCaras();
+  cargarTablaLogs();
+  cargarStats();
+
+  // Botón de exportar encuestas
+  const btnExportar = document.getElementById("btn-exportar-encuestas");
+  if (btnExportar) {
+    btnExportar.addEventListener("click", exportarEncuestasExcel);
+  }
+});

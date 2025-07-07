@@ -1,66 +1,116 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Registros Admin</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
-  <link href="../css/admin-registros.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-</head>
-<body class="bg-gray-50 min-h-screen p-6">
-  <h1 class="text-2xl font-bold mb-6">Panel de Registros</h1>
-  <section class="mb-8">
-    <h2 class="text-xl font-semibold mb-2">Top 10 productos más vendidos</h2>
-    <table class="w-full bg-white rounded-xl shadow mb-4">
-      <thead>
-        <tr class="bg-gray-100">
-          <th class="px-3 py-2">#</th>
-          <th class="px-3 py-2">Producto</th>
-          <th class="px-3 py-2">Cantidad</th>
-        </tr>
-      </thead>
-      <tbody id="topProductos"></tbody>
-    </table>
-  </section>
-  <section class="mb-8">
-    <h2 class="text-xl font-semibold mb-2">Top 10 ventas más caras</h2>
-    <table class="w-full bg-white rounded-xl shadow mb-4">
-      <thead>
-        <tr class="bg-gray-100">
-          <th class="px-3 py-2">#</th>
-          <th class="px-3 py-2">Cliente</th>
-          <th class="px-3 py-2">Total</th>
-        </tr>
-      </thead>
-      <tbody id="topVentas"></tbody>
-    </table>
-  </section>
-  <section class="mb-8">
-    <h2 class="text-xl font-semibold mb-2">LOG de inicios de sesión</h2>
-    <table class="w-full bg-white rounded-xl shadow mb-4">
-      <thead>
-        <tr class="bg-gray-100">
-          <th class="px-3 py-2">Fecha</th>
-          <th class="px-3 py-2">Usuario</th>
-        </tr>
-      </thead>
-      <tbody id="logs"></tbody>
-    </table>
-  </section>
-  <section class="mb-8 flex gap-6">
-    <div class="bg-white p-6 rounded-xl shadow w-1/2 text-center">
-      <div class="text-5xl font-bold mb-2" id="cantVentas">--</div>
-      <div class="text-gray-600">Total Ventas</div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registros Administrador | Pokémon Business</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Favicon Pokémon -->
+    <link rel="icon" type="image/png" href="../assets/pokebola.png" />
+    <!-- Bootstrap 5 CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Estilo custom Pokémon -->
+    <link rel="stylesheet" href="../css/admin-registros.css" />
+    <!-- SheetJS para exportar Excel -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <div class="container py-3">
+      <div class="pokemon-header">
+        <img src="../assets/pokebola.png" alt="Pokebola" />
+        Registros Administrador
+        <span style="font-size: 1.2rem; font-weight: 400"
+          >| Pokémon Business</span
+        >
+      </div>
     </div>
-    <div class="bg-white p-6 rounded-xl shadow w-1/2 text-center">
-      <div class="text-5xl font-bold mb-2" id="promedioVenta">--</div>
-      <div class="text-gray-600">Promedio por Venta</div>
+    <!-- ESTADÍSTICAS -->
+    <div class="container mb-4">
+      <div class="row g-2 justify-content-center">
+        <div class="col-md-3 col-6">
+          <div class="stats-box text-center">
+            Encuestas Realizadas<br /><span id="stat-encuestas">-</span>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stats-box text-center">
+            Productos Totales<br /><span id="stat-productos">-</span>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stats-box text-center">
+            Ventas Totales<br /><span id="stat-ventas">-</span>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stats-box text-center">
+            Admins Activos<br /><span id="stat-admins">-</span>
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
-  <section>
-    <button onclick="descargarEncuestas()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Descargar encuestas en Excel</button>
-  </section>
-  <script src="../js/admin-registros.js"></script>
-</body>
+    <!-- TABLAS DE REGISTROS -->
+    <div class="container mb-4">
+      <div class="row g-4">
+        <!-- Productos más vendidos -->
+        <div class="col-lg-6">
+          <div class="table-responsive">
+            <table class="table table-pokemon">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Producto</th>
+                  <th>Vendidos</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-productos-vendidos"></tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Ventas más caras -->
+        <div class="col-lg-6">
+          <div class="table-responsive">
+            <table class="table table-pokemon">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Producto</th>
+                  <th>Precio</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-ventas-caras"></tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Logs de login -->
+        <div class="col-12">
+          <div class="log-table table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Administrador</th>
+                  <th>Fecha/Hora</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-logs-login"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Botón descargar encuestas Excel -->
+      <div class="d-flex justify-content-end my-4">
+        <button id="btn-exportar-encuestas" class="btn-pokemon">
+          Descargar encuestas en Excel
+        </button>
+      </div>
+    </div>
+    <!-- Script de la página -->
+    <script src="../js/admin-registros.js"></script>
+  </body>
 </html>

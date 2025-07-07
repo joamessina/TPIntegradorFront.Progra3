@@ -2,98 +2,124 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <title>Encuesta Cartas Pokémon | Pokémon Business</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Encuesta Cliente</title>
+    <!-- Favicon Pokémon -->
+    <link rel="icon" type="image/png" href="../assets/pokebola.png" />
+    <!-- Bootstrap 5 CDN -->
     <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link href="../css/encuesta.css" rel="stylesheet" />
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Estilo custom encuesta -->
+    <link rel="stylesheet" href="../css/encuesta.css" />
   </head>
-  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white shadow-xl rounded-xl p-8 w-full max-w-lg relative">
-      <h2 class="text-2xl font-bold mb-4 text-center">
-        ¡Tu opinión nos importa!
-      </h2>
-      <form id="encuestaForm" class="space-y-4">
-        <div>
-          <label class="block mb-1">Correo electrónico</label>
-          <input
-            type="email"
-            id="email"
-            class="w-full border rounded px-3 py-2"
-            required
-          />
-          <span class="text-red-600 text-xs hidden" id="emailError"
-            >Email inválido</span
-          >
-        </div>
-        <div>
-          <label class="block mb-1">Dejá tu comentario</label>
-          <textarea
-            id="opinion"
-            class="w-full border rounded px-3 py-2"
-            rows="3"
-            required
-          ></textarea>
-          <span class="text-red-600 text-xs hidden" id="opinionError"
-            >Comentario requerido</span
-          >
-        </div>
-        <div>
-          <label class="inline-flex items-center">
-            <input type="checkbox" id="recomienda" class="form-checkbox" />
-            <span class="ml-2">¿Recomendarías nuestro servicio?</span>
-          </label>
-        </div>
-        <div>
-          <label class="block mb-1"
-            >Puntaje del servicio:
-            <span id="sliderValue" class="font-bold">5</span></label
-          >
-          <input
-            type="range"
-            id="puntaje"
-            min="1"
-            max="10"
-            value="5"
-            class="w-full"
-          />
-        </div>
-        <div>
-          <label class="block mb-1">Adjuntar una imagen (opcional)</label>
-          <input type="file" id="imagen" accept="image/*" class="block" />
-          <span class="text-red-600 text-xs hidden" id="imagenError"
-            >Solo imágenes de menos de 2MB</span
-          >
-        </div>
-        <div class="flex justify-between items-center mt-6">
-          <button type="button" id="omitir" class="text-gray-500 underline">
-            Omitir
+  <body>
+    <div class="container py-3">
+      <div class="poke-card-title">
+        <img src="../assets/pokebola.png" alt="Pokebola" />
+        Encuesta Coleccionista de Cartas Pokémon
+        <span class="carta-estrella">★</span>
+      </div>
+      <div class="encuesta-card position-relative">
+        <div class="pokeball-bg"></div>
+        <form id="encuesta-form" class="encuesta-form" autocomplete="off">
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              required
+              placeholder="nombre@ejemplo.com"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="opinion" class="form-label"
+              >¿Qué opinás de nuestra selección de cartas Pokémon?</label
+            >
+            <textarea
+              id="opinion"
+              name="opinion"
+              class="form-control"
+              required
+              placeholder="Contanos tu experiencia, colección o carta favorita..."
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label d-block"
+              >¿Nos recomendarías a otros coleccionistas?</label
+            >
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="checkbox1"
+                name="checkbox1"
+                value="Recomendaría"
+              />
+              <label class="form-check-label" for="checkbox1">Sí</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="checkbox2"
+                name="checkbox2"
+                value="No recomendaría"
+              />
+              <label class="form-check-label" for="checkbox2">No</label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="puntos" class="form-label slider-label"
+              >¿Qué puntaje le das a tu compra de cartas?</label
+            >
+            <input
+              type="range"
+              min="1"
+              max="10"
+              step="1"
+              id="puntos"
+              name="puntos"
+              class="form-range"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="imagen" class="form-label"
+              >Subí una foto de tu carta favorita (PNG/JPG)</label
+            >
+            <input
+              type="file"
+              id="imagen"
+              name="imagen"
+              class="form-control"
+              accept="image/png,image/jpeg"
+              required
+            />
+          </div>
+          <div id="errores-encuesta"></div>
+          <button type="submit" class="btn-pokemon w-100">
+            Enviar Encuesta
           </button>
-          <button
-            type="submit"
-            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            Enviar
+          <button type="button" id="btn-omitir" class="btn-omitir w-100 mt-2">
+            Omitir encuesta
           </button>
-        </div>
-      </form>
-    </div>
-    <div
-      id="modalGracias"
-      class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden"
-    >
-      <div class="bg-white rounded-xl shadow-xl p-8 text-center">
-        <h3 class="text-2xl font-bold mb-3">¡Gracias por tu opinión!</h3>
-        <button
-          class="mt-4 bg-blue-600 text-white px-4 py-2 rounded"
-          onclick="cerrarModal()"
-        >
-          Cerrar
-        </button>
+        </form>
       </div>
     </div>
+    <!-- Modal de agradecimiento -->
+    <div id="modal-agradecimiento">
+      <div class="modal-card">
+        <img src="../assets/charizard.png" id="modal-charizard-img" />
+        <h3>¡Gracias por tu opinión, Maestro Pokémon!</h3>
+        <div>Charizard te saluda 🐉🔥<br />Redirigiendo al inicio...</div>
+      </div>
+    </div>
+    <!-- Script principal -->
     <script src="../js/encuesta.js"></script>
   </body>
 </html>
