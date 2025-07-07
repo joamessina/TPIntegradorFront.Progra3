@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TCG Shop - Tienda</title>
+    <link rel="stylesheet" href="../css/tienda.css" />
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="container-header">
+        <img
+          src="../images/empresa_logo.png"
+          alt="TCG Shop Logo"
+          class="logo"
+        />
+        <h1>TCG Shop</h1>
+        <div>
+          <button
+            onclick="window.location.href='carrito.html'"
+            id="carrito-btn"
+          >
+            🛒 Carrito (<span id="carrito-cantidad">0</span>)
+          </button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="productos-container" id="productos-list">
+        <!-- Acá se renderizan las cartas/productos -->
+      </div>
+    </main>
+    <footer>
+      <p>&copy; <span id="year"></span> TCG Shop</p>
+    </footer>
+    <script src="../js/index.js"></script>
+    <script src="../js/carrito.js"></script>
+  </body>
+</html>
