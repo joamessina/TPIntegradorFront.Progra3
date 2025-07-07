@@ -39,6 +39,14 @@ async function cargarProductos() {
             ? `$${Number(p.precio).toLocaleString()}`
             : '<span class="no-disponible">No disponible</span>'
         }</div>
+        <button onclick='agregarAlCarrito(${JSON.stringify({
+          id: p.id,
+          nombre: p.nombre,
+          precio: p.precio,
+          stock: p.stock,
+        })})' ${!p.activo ? 'disabled' : ''}>
+          Agregar al carrito
+        </button>
       </div>
     `
       )
@@ -47,6 +55,32 @@ async function cargarProductos() {
     contenedor.innerHTML = '<p>Error al cargar productos.</p>';
   }
 }
+
+function agregarAlCarrito(producto) {
+  const carrito = getCarrito();
+  const existente = carrito.find((item) => item.id === producto.id);
+
+  if (existente) {
+    if (existente.cantidad + 1 > producto.stock) {
+      alert(`No hay stock suficiente. Stock disponible: ${producto.stock}`);
+      return;
+    }
+    existente.cantidad += 1;
+  } else {
+    carrito.push({ ...producto, cantidad: 1 });
+  }
+
+  setCarrito(carrito);
+  actualizarCarritoNav();
+}
+function actualizarCarritoNav() {
+  const carrito = getCarrito();
+  const cantidad = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+  const span = document.getElementById('carrito-cantidad');
+  if (span) span.textContent = cantidad;
+}
+
+window.agregarAlCarrito = agregarAlCarrito;
 
 document.addEventListener('DOMContentLoaded', () => {
   cargarProductos();

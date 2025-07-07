@@ -16,7 +16,14 @@
           class="logo"
         />
         <h1>TCG Shop</h1>
-        <div></div>
+        <div>
+          <button
+            onclick="window.location.href='carrito.html'"
+            id="carrito-btn"
+          >
+            🛒 Carrito (<span id="carrito-cantidad">0</span>)
+          </button>
+        </div>
       </div>
     </header>
     <main>
@@ -28,5 +35,6 @@
       <p>&copy; <span id="year"></span> TCG Shop</p>
     </footer>
     <script src="../js/index.js"></script>
+    <script src="../js/carrito.js"></script>
   </body>
 </html>

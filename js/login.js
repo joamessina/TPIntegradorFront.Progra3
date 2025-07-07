@@ -20,7 +20,6 @@ document
 
       if (response.ok) {
         localStorage.setItem('token', data.token);
-        // Redirecciona a la página principal del cliente
         window.location.href = '../pages/index.html';
       } else {
         document.getElementById('login-error').textContent =
