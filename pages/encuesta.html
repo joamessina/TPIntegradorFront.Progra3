@@ -15,8 +15,69 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Estilo custom encuesta -->
     <link rel="stylesheet" href="../css/encuesta.css" />
+    <!-- Header estilos (si tenés algo en tienda.css, podés sumarlo) -->
+    <link rel="stylesheet" href="../css/tienda.css" />
   </head>
   <body>
+    <!-- HEADER UNIVERSAL DE NAVEGACIÓN -->
+    <header class="bg-dark py-3 mb-4">
+      <div class="container d-flex align-items-center justify-content-between">
+        <!-- Logo Izquierda -->
+        <img
+          src="../images/empresa_logo.png"
+          alt="Logo Izq"
+          class="logo-header"
+        />
+
+        <!-- Título -->
+        <div class="flex-grow-1 text-center">
+          <h1 class="display-5 fw-bold mb-0 text-white">TCG Shop</h1>
+        </div>
+
+        <!-- Logo Derecha -->
+        <img
+          src="../images/empresa_logo2.jpg"
+          alt="Logo Der"
+          class="logo-header d-none d-md-block"
+        />
+
+        <!-- Navbar de páginas (sin login) -->
+        <nav class="ms-4">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="index.html">Inicio</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link text-white" href="encuesta.html">Encuesta</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="admin-registros.html"
+                >Admin</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Carrito arriba a la derecha -->
+        <div class="ms-3 carrito-derecha">
+          <button
+            onclick="window.location.href='carrito.html'"
+            id="carrito-btn"
+            class="btn btn-lg btn-warning position-relative fw-semibold"
+          >
+            🛒 Carrito
+            <span
+              id="carrito-cantidad"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            >
+              0
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <!-- CONTENIDO ORIGINAL -->
     <div class="container py-3">
       <div class="poke-card-title">
         <img src="../assets/pokebola.png" alt="Pokebola" />

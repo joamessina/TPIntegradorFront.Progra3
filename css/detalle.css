@@ -3,7 +3,7 @@
 body {
   background: linear-gradient(120deg, #ffe066 25%, #fffde4 70%);
   min-height: 100vh;
-  font-family: "Segoe UI", "Arial", sans-serif;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
 }
 
 /* Header tipo carta */
@@ -54,7 +54,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("../assets/pokebola.png") center center no-repeat;
+  background: url('../assets/pokebola.png') center center no-repeat;
   background-size: 65%;
   pointer-events: none;
   z-index: 0;

@@ -37,47 +37,53 @@ async function cargarProductos() {
     contenedor.innerHTML = productos
       .map(
         (p) => `
-        <div class="product-card card shadow-sm mb-3">
-          <img 
-            src="${
-              p.imagen
-                ? p.imagen.startsWith('http')
-                  ? p.imagen
-                  : 'http://localhost:3000/images/' + p.imagen
-                : 'https://static.wikia.nocookie.net/4edf6693-39d6-4d5c-b426-59f4a9e6c382/scale-to-width/755'
-            }"
-            class="card-img-top"
-            style="max-height:170px;object-fit:contain;" 
-            alt="${p.nombre}" 
-          />
-          <div class="card-body p-2">
-            <h2 class="card-title h6 fw-bold mb-1">${p.nombre}</h2>
-            <div class="text-muted small mb-1">Tipo: ${p.tipo}</div>
-            <div class="text-muted small mb-2">Expansión: ${p.expansion}</div>
-            <div class="precio mb-2">
-              ${
-                p.activo
-                  ? `<span class="fw-bold text-success">$${Number(
-                      p.precio
-                    ).toLocaleString()}</span>`
-                  : '<span class="badge bg-danger">No disponible</span>'
-              }
-            </div>
-            <button
-              class="btn btn-primary btn-sm w-100"
-              onclick='agregarAlCarrito(${JSON.stringify({
-                id: p.id,
-                nombre: p.nombre,
-                precio: p.precio,
-                stock: p.stock,
-              })})'
-              ${!p.activo ? 'disabled' : ''}
-            >
-              Agregar al carrito
-            </button>
+      <div class="product-card card shadow-sm mb-3">
+        <img 
+          src="${
+            p.imagen
+              ? p.imagen.startsWith('http')
+                ? p.imagen
+                : 'http://localhost:3000/images/' + p.imagen
+              : 'https://static.wikia.nocookie.net/4edf6693-39d6-4d5c-b426-59f4a9e6c382/scale-to-width/755'
+          }"
+          class="card-img-top"
+          style="max-height:170px;object-fit:contain;" 
+          alt="${p.nombre}" 
+        />
+        <div class="card-body p-2">
+          <h2 class="card-title h6 fw-bold mb-1">${p.nombre}</h2>
+          <div class="text-muted small mb-1">Tipo: ${p.tipo}</div>
+          <div class="text-muted small mb-2">Expansión: ${p.expansion}</div>
+          <div class="precio mb-2">
+            ${
+              p.activo
+                ? `<span class="fw-bold text-success">$${Number(
+                    p.precio
+                  ).toLocaleString()}</span>`
+                : '<span class="badge bg-danger">No disponible</span>'
+            }
           </div>
+          <button
+            class="btn btn-primary btn-sm w-100"
+            onclick='agregarAlCarrito(${JSON.stringify({
+              id: p.id,
+              nombre: p.nombre,
+              precio: p.precio,
+              stock: p.stock,
+            })})'
+            ${!p.activo ? 'disabled' : ''}
+          >
+            Agregar al carrito
+          </button>
+          <a 
+            href="detalle.html?id=${p.id}" 
+            class="btn btn-outline-secondary btn-sm w-100 mt-2"
+          >
+            Ver detalle
+          </a>
         </div>
-        `
+      </div>
+    `
       )
       .join('');
   } catch (err) {
