@@ -49,6 +49,7 @@ async function cargarProductos() {
           class="card-img-top"
           style="max-height:170px;object-fit:contain;" 
           alt="${p.nombre}" 
+          onerror="this.onerror=null;this.src='https://static.wikia.nocookie.net/4edf6693-39d6-4d5c-b426-59f4a9e6c382/scale-to-width/755';"
         />
         <div class="card-body p-2">
           <h2 class="card-title h6 fw-bold mb-1">${p.nombre}</h2>
