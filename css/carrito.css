@@ -5,7 +5,7 @@ body {
     #fffbe7 0 60px,
     #ffe06633 60px 120px
   );
-  font-family: "Segoe UI", "Arial", sans-serif;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
   min-height: 100vh;
   margin: 0;
   position: relative;
@@ -13,13 +13,13 @@ body {
 
 /* Pokebola de fondo, más sutil */
 body::before {
-  content: "";
+  content: '';
   position: fixed;
   left: 50%;
   top: 56%;
   width: 320px;
   height: 320px;
-  background: url("../assets/pokebola.png") center/cover no-repeat;
+  background: url('../assets/pokebola.png') center/cover no-repeat;
   opacity: 0.04;
   z-index: 0;
   transform: translate(-50%, -50%);
@@ -118,8 +118,7 @@ h1 {
   color: #e3350d;
   font-weight: 700;
 }
-.carrito-item input[type="number"] {
-  width: 48px;
+.carrito-item input[type='number'] {
   border: 2px solid #ffe06699;
   border-radius: 8px;
   padding: 0.19em 0.5em;

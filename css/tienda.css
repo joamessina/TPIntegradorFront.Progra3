@@ -3,31 +3,15 @@ body {
   font-family: 'Segoe UI', Arial, sans-serif;
   margin: 0;
   padding: 0;
+  min-height: 100vh;
 }
 
-header {
-  background: #23272f;
-  color: #fff;
-  padding: 1.5rem 0;
-  margin-bottom: 20px;
-}
-
-.container-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-
-.logo {
-  height: 55px;
-}
-
-h1 {
-  margin: 0;
-  font-size: 2.4rem;
-  font-weight: 800;
-  letter-spacing: 1px;
+.logo-header {
+  height: 195px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(60, 60, 60, 0.08);
+  padding: 5px;
 }
 
 .productos-container {
@@ -41,17 +25,17 @@ h1 {
 
 .product-card {
   background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 3px 14px rgba(50, 50, 70, 0.08);
-  padding: 18px;
+  border-radius: 16px;
+  box-shadow: 0 3px 18px rgba(50, 50, 70, 0.1);
+  padding: 22px;
   text-align: center;
   display: flex;
   flex-direction: column;
   transition: transform 0.14s;
 }
 .product-card:hover {
-  transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 8px 22px rgba(34, 34, 70, 0.12);
+  transform: translateY(-7px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(34, 34, 70, 0.15);
 }
 
 .product-card img {
@@ -63,20 +47,20 @@ h1 {
 }
 
 .product-card h2 {
-  font-size: 1.16rem;
-  margin: 6px 0;
-  font-weight: 600;
+  font-size: 1.18rem;
+  margin: 8px 0;
+  font-weight: 700;
 }
 
 .product-card .tipo,
 .product-card .expansion {
-  font-size: 0.98rem;
+  font-size: 1.01rem;
   color: #555;
   margin-bottom: 4px;
 }
 
 .product-card .precio {
-  font-size: 1.18rem;
+  font-size: 1.25rem;
   font-weight: bold;
   color: #144085;
   margin-top: 8px;
@@ -88,9 +72,10 @@ h1 {
   margin-top: 6px;
 }
 
-footer {
-  background: #23272f;
-  color: #ddd;
-  text-align: center;
-  padding: 14px 0 10px 0;
+footer.footer {
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  z-index: 20;
+  box-shadow: 0 -1px 10px rgba(40, 40, 60, 0.04);
 }

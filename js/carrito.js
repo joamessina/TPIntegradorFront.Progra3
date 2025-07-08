@@ -1,3 +1,20 @@
+async function fetchConAuth(url, options = {}) {
+  const token = localStorage.getItem('token');
+  const headers = options.headers || {};
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+
+  const res = await fetch(url, { ...options, headers });
+
+  if (res.status === 401 || res.status === 403) {
+    localStorage.removeItem('token');
+    alert('La sesión ha expirado, por favor volvé a iniciar sesión.');
+    window.location.href = 'login.html';
+    return null;
+  }
+
+  return res;
+}
+
 function getCarrito() {
   return JSON.parse(localStorage.getItem('carrito')) || [];
 }
@@ -108,6 +125,9 @@ document.addEventListener('DOMContentLoaded', function () {
             })),
           }),
         });
+
+        if (!res) return;
+
         const data = await res.json();
         if (res.ok) {
           vaciarCarrito();

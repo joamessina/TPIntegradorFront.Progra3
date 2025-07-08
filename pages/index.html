@@ -4,37 +4,89 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TCG Shop - Tienda</title>
+    <!-- Bootstrap 5 CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../css/tienda.css" />
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
   </head>
-  <body>
-    <header>
-      <div class="container-header">
+  <body class="d-flex flex-column min-vh-100">
+    <!-- Header con Bootstrap -->
+    <header class="bg-dark py-3 mb-4">
+      <div class="container d-flex align-items-center justify-content-between">
+        <!-- Logo Izquierda -->
         <img
           src="../images/empresa_logo.png"
-          alt="TCG Shop Logo"
-          class="logo"
+          alt="Logo Izq"
+          class="logo-header"
         />
-        <h1>TCG Shop</h1>
-        <div>
+
+        <!-- Título -->
+        <div class="flex-grow-1 text-center">
+          <h1 class="display-5 fw-bold mb-0 text-white">TCG Shop</h1>
+        </div>
+
+        <!-- Logo Derecha -->
+        <img
+          src="../images/empresa_logo2.jpg"
+          alt="Logo Der"
+          class="logo-header d-none d-md-block"
+        />
+
+        <!-- Carrito arriba a la derecha -->
+        <div class="ms-3">
           <button
             onclick="window.location.href='carrito.html'"
             id="carrito-btn"
+            class="btn btn-lg btn-warning position-relative fw-semibold"
           >
-            🛒 Carrito (<span id="carrito-cantidad">0</span>)
+            🛒 Carrito
+            <span
+              id="carrito-cantidad"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            >
+              0
+            </span>
           </button>
         </div>
       </div>
     </header>
-    <main>
-      <div class="productos-container" id="productos-list">
+
+    <main class="flex-grow-1">
+      <div class="container productos-container" id="productos-list">
         <!-- Acá se renderizan las cartas/productos -->
       </div>
     </main>
-    <footer>
-      <p>&copy; <span id="year"></span> TCG Shop</p>
+    <!-- Toast de producto agregado -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 9999">
+      <div
+        id="toast-agregado"
+        class="toast align-items-center text-bg-success border-0"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="d-flex">
+          <div class="toast-body">Producto agregado al carrito</div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Cerrar"
+          ></button>
+        </div>
+      </div>
+    </div>
+    <footer
+      class="footer mt-auto bg-dark text-light text-center py-3 fixed-bottom"
+    >
+      <p class="mb-0">&copy; <span id="year"></span> TCG Shop</p>
     </footer>
+
     <script src="../js/index.js"></script>
     <script src="../js/carrito.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
